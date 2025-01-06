@@ -1,0 +1,11 @@
+workers:
+  count: 2
+  minimum: 2
+  memory: 2048
+git:
+  gitOps: none
+  authType: ssh
+  autoAction: none
+  strictHostKeyChecking: true
+  commitDeploySingleAction: true
+  defaultCommitMessage: Committing new update.

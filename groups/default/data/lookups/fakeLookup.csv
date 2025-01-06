@@ -1,0 +1,21 @@
+ip_address,hostname,location
+10.0.0.1,server1,New York
+10.0.0.2,server2,Los Angeles
+10.0.0.3,server3,Chicago
+10.0.0.4,server4,Houston
+10.0.0.5,server5,Phoenix
+10.0.0.6,server6,Philadelphia
+10.0.0.7,server7,San Antonio
+10.0.0.8,server8,San Diego
+10.0.0.9,server9,Dallas
+10.0.0.10,server10,San Jose
+10.0.0.11,server11,Austin
+10.0.0.12,server12,Jacksonville
+10.0.0.13,server13,Fort Worth
+10.0.0.14,server14,Columbus
+10.0.0.15,server15,San Francisco
+10.0.0.16,server16,Charlotte
+10.0.0.17,server17,Indianapolis
+10.0.0.18,server18,Seattle
+10.0.0.19,server19,Denver
+10.0.0.20,server20,Washington

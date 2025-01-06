@@ -1,0 +1,12 @@
+{
+  "token": {
+    "key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzYyMDE1MDgsImV4cCI6MTczNjIwNTEwOCwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVzIjpbImFkbWluIl19.OP0x1uJ1lAz49Qwf48_0SIsTZl5QKOdo2oj2sm0aBL4",
+    "timestamp": "Mon Jan  6 22:11:49.033 UTC 2025",
+    "expires_on": 1736205109
+  },
+  "passwd": {
+    "ca_passwd": "11KVp2YsSBikQLUzraKc9cF8e7MZkkzP0WEjPltJeI8=",
+    "timestamp": "Mon Jan  6 22:11:49.262 UTC 2025",
+    "ma_passwd": "94FY+TqV/Xq6T0huGRfj6gXGgbJmyoGy7aVFiGPXHT0="
+  }
+}

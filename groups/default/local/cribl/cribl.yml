@@ -1,0 +1,4 @@
+workers:
+  count: 2
+  minimum: 2
+  memory: 2048
