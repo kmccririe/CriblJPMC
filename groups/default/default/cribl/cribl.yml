@@ -17,9 +17,12 @@ system:
   intercom: true
 upgradeSettings:
   disableAutomaticUpgrade: true
+  enableLegacyEdgeUpgrade: false
 workers: 
   count: -2
   minimum: 2
   memory: 2048
 proxy:
   useEnvVars: true
+shutdown:
+  drainTimeout: 10

@@ -85,10 +85,12 @@
       "rows": 1
     }
   },
-  "timeout": {"ui:options": {"inline": true, "width": "15%"}},
-  "useRoundRobinDns": {"ui:options": {"inline": true, "width": "15%"}},
-  "disableTimeFilter": {"ui:options": {"inline": true, "width": "15%"}},
+  "timeout": {"ui:options": {"inline": true}},
+  "useRoundRobinDns": {"ui:options": {"inline": true}},
+  "disableTimeFilter": {"ui:options": {"inline": true}},
+  "rejectUnauthorized": {"ui:options": {"inline": true}},
   "retryRules": {
+    "ui:forceRender": true,
     "codes": {
       "ui:field": "Tags",
       "ui:options": {
@@ -97,7 +99,10 @@
     },
     "interval": { "ui:options": { "inline": true }},
     "multiplier": { "ui:options": { "inline": true }},
-    "limit": { "ui:options": { "inline": true }}
+    "limit": { "ui:options": { "inline": true }},
+    "enableHeader": { "ui:options": { "inline": true }},
+    "retryConnectTimeout": { "ui:options": { "inline": true }},
+    "retryConnectReset": { "ui:options": { "inline": true }}
   },
   "ui:options": {
     "groups": {

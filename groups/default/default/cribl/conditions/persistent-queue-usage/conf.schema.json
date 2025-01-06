@@ -22,6 +22,12 @@
       "default": 90,
       "minimum": 0,
       "maximum": 99
+    },
+    "notifyOnResolution": {
+      "type": "boolean",
+      "title": "Only notify on start and resolution",
+      "description": "Send notifications only when condition starts and resolves. Disable to send notifications for every event.",
+      "default": true
     }
   }
 }

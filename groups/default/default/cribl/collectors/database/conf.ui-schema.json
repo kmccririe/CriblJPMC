@@ -28,7 +28,7 @@
         "stateTracking": {
           "title": "State Tracking",
           "collapsed": true,
-          "order": 1,
+          "order": -1,
           "properties": ["stateTracking"]
         }
       }

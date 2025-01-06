@@ -159,6 +159,14 @@
               "title": "TLS",
               "type": "boolean",
               "description": "Should TLS be used for connections to this cluster?"
+            },
+            "scaleReads": {
+              "title": "Scale Reads",
+              "type": "string",
+              "description": "Which nodes should read commands be sent to.",
+              "enum": ["master", "replica", "all"],
+              "enumNames": ["Masters", "Replicas", "Masters and Replicas"],
+              "default": "master"
             }
           },
           "dependencies": {

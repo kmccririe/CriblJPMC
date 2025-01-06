@@ -34,6 +34,9 @@
   "recurse": {
     "ui:options": { "inline": true, "width": "30%" }
   },
+  "path": {
+    "ui:options": "{extraDescription: collector && collector.conf && !collector.conf.path ? [{content: 'Caution: If a path is not set, all contents of the specified GCS bucket will be collected.', alertProps: {type: 'warning', showIcon: true}}] : []}"
+  },
   "maxBatchSize": {
     "ui:options": { "inline": true, "width": "30%" }
   },
@@ -42,12 +45,7 @@
     "ui:widget" : "JsInput"
   },
   "authType": {
-    "ui:options": {
-      "uiEnumOptions": [
-        { "value": "manual", "label": "Manual", "description": "Enter credentials directly" },
-        { "value": "secret", "label": "Secret", "description": "Select (or create) a stored text secret" }
-      ]
-    }
+    "ui:options": "{uiEnumOptions: [{value: 'auto', label: 'Auto', description: 'Use Google Application Default Credentials'},{value: 'manual', label: 'Manual', description: 'Enter credentials directly'},{value: 'secret', label: 'Secret', description: 'Select or create a stored text secret'}],extraDescription: collector && collector.conf && collector.conf.authType === 'auto' ? [{content: 'Caution: @{node}s running @{product} version 4.8.1 and older do not support automatic authentication and will fail to start with this configuration.', alertProps: {type: 'warning', showIcon: true}}] : []}"
   },
   "textSecret": {
     "ui:widget": "ApiLookupWithCreate",

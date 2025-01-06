@@ -6,7 +6,10 @@
     "type": {
       "type": "string",
       "enum": ["azure_blob"],
-      "flag": {"prefix": "collector"}
+      "flag": {
+        "prefix": "collector",
+        "modes": ["single", "worker"]
+      }
     },
     "outputName": {
       "type": "string",
@@ -16,7 +19,7 @@
     "authType": {
       "title": "Authentication method",
       "type": "string",
-      "enum": ["manual", "secret"],
+      "enum": ["manual", "secret", "clientSecret", "clientCert"],
       "default": "manual",
       "description": "Enter authentication data directly, or select a secret referencing your auth data"
     },
@@ -123,6 +126,65 @@
               "secret": { "type": "text", "target": "connectionString" },
               "title": "Connection string (text secret)",
               "description": "Text secret"
+            }
+          }
+        },
+        {
+          "required": ["storageAccountName", "tenantId", "clientId", "clientTextSecret"],
+          "properties": {
+            "authType": { "enum":["clientSecret"] },
+            "storageAccountName": {
+              "type": "string",
+              "title": "Storage account name",
+              "description": "The name of your Azure storage account"
+            },
+            "tenantId": {
+              "type": "string",
+              "title": "Tenant ID",
+              "description": "The service principal's tenant ID"
+            },
+            "clientId": {
+              "type": "string",
+              "title": "Client ID",
+              "description": "The service principal's client ID"
+            },
+            "clientTextSecret": {
+              "type": "string",
+              "secret": { "type": "text", "target": "clientSecretValue" },
+              "title": "Client secret (text secret)",
+              "description": "Text secret containing the client secret"
+            }
+          }
+        },
+        {
+          "required": ["storageAccountName", "tenantId", "clientId", "certificate"],
+          "properties": {
+            "authType": { "enum":["clientCert"] },
+            "storageAccountName": {
+              "type": "string",
+              "title": "Storage account name",
+              "description": "The name of your Azure storage account"
+            },
+            "tenantId": {
+              "type": "string",
+              "title": "Tenant ID",
+              "description": "The service principal's tenant ID"
+            },
+            "clientId": {
+              "type": "string",
+              "title": "Client ID",
+              "description": "The service principal's client ID"
+            },
+            "certificate": {
+              "type": "object",
+              "required": ["certificateName"],
+              "properties": {
+                "certificateName": {
+                  "type": "string",
+                  "title": "Certificate",
+                  "description": "The certificate you registered as credentials for your app in the Azure portal"
+                }
+              }
             }
           }
         }

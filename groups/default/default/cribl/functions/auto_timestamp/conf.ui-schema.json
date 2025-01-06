@@ -11,6 +11,7 @@
     "ui:options": {
       "url": "/timezoneInfo",
       "ignorePackContext": true,
+      "ignoreContext": true,
       "valueProp": "value",
       "labelProp": "label",
       "editable": false,

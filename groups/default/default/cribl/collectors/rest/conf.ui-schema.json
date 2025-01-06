@@ -21,11 +21,27 @@
         "authRequestParams": "authRequestParams",
         "clientSecretParamName": "clientSecretParamName",
         "clientSecretParamValue": "clientSecretParamValue",
-        "textSecret": "textSecret"
+        "textSecret": "textSecret",
+        "subject": "subject",
+        "scopes": "scopes",
+        "serviceAccountCredentials": "serviceAccountCredentials",
+        "enableDiscoverCode": "enableDiscoverCode",
+        "formatResultCode": "formatResultCode",
+        "hmacFunctionId": "hmacFunctionId"
       }
     }
   },
   "discovery" : {
+    "discoverType": {
+      "ui:options": {
+        "uiEnumOptions": [
+          { "value": "http", "label": "HTTP Request", "description": "Make a REST call to dynamically get Discover results" },
+          { "value": "json", "label": "JSON Response", "description": "Manually define Discover results as a JSON object" },
+          { "value": "list", "label": "Item List", "description": "Enumerate Discover results as a list of strings" },
+          { "value": "none", "label": "None", "description": "No Discover operation required" }
+        ]
+      }
+    },
     "discoverUrl": {
       "ui:widget": "JsInput", "ui:placeholder": "Enter URL expression for the discover operation", "ui:options": { "columnWidth": "60%" }
     },
@@ -43,9 +59,6 @@
         "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter header value", "ui:options": { "columnWidth": "60%" } }
       }
     },
-    "discoverDataField": {
-      "ui:placeholder": "Enter name of the field that contains discover results"
-    },
     "itemList": {
       "ui:field": "Tags",
       "ui:placeholder": "Enter list of items to return from the discover task.",
@@ -58,6 +71,18 @@
       "ui:options": {
         "rows": 5
       }
+    },
+    "enableDiscoverCode" : {},
+    "formatResultCode": {
+      "ui:widget": "JsInput",
+      "ui:options": {
+        "autoheight": true,
+        "numLines": 10,
+        "scrollbar": {
+          "horizontal": "visible"
+        }
+      },
+      "ui:placeholder": "const count = +__e['count']; // Expecting __e = { \"count\" : 12345 }\nconst pageSize=100000;\nconst numPages=count/pageSize;\n// Add a task for each page of data to be retrieved\nconst collectTasks=[];\nfor (let i = 0; i < numPages; i++) {\n  collectTasks.push({ offset: i*pageSize, limit: pageSize, count }) // `${offset}` and `${limit}` can be referenced in collect request params\n}\n// Add tasks array to the result object - Discover data field should be set to 'tasks' and will execute one collect task per item in tasks array\n__e['tasks'] = collectTasks;"
     }
   },
   "collectUrl": {
@@ -108,7 +133,10 @@
         {"value": "login", "label": "Login"},
         {"value": "loginSecret", "label": "Login (credentials secret)"},
         {"value": "oauth", "label": "OAuth"},
-        {"value": "oauthSecret", "label": "OAuth (text secret)"}
+        {"value": "oauthSecret", "label": "OAuth (text secret)"},
+        {"value": "google_oauth", "label": "Google service account OAuth"},
+        {"value": "google_oauthSecret", "label": "Google service account OAuth (text secret)"},
+        {"value": "hmac", "label": "HMAC"}
       ]
     }
   },
@@ -160,21 +188,48 @@
       "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter header value", "ui:options": { "columnWidth": "60%" } }
     }
   },
-  "timeout": {"ui:options": {"inline": true, "width": "20%"}},
-  "useRoundRobinDns": {"ui:options": {"inline": true, "width": "20%"}},
-  "disableTimeFilter": {"ui:options": {"inline": true, "width": "20%"}},
-  "rejectUnauthorized": {"ui:options": {"inline": true, "width": "40%"}},
+  "useRoundRobinDns": { "ui:options": { "titleInlineStyle": { "minWidth": 240 }}},
+  "disableTimeFilter": { "ui:options": { "titleInlineStyle": { "minWidth": 240 }}},
+  "decodeUrl": { "ui:options": { "titleInlineStyle": { "minWidth": 240 }}},
+  "rejectUnauthorized": { "ui:options": { "titleInlineStyle": { "minWidth": 240 }}},
+  "captureHeaders": { "ui:options": { "titleInlineStyle": { "minWidth": 240 }}},
   "safeHeaders": { "ui:field": "Tags", "ui:placeholder": "Header names" },
   "retryRules": {
+    "ui:forceRender": true,
     "codes": {
       "ui:field": "Tags",
       "ui:options": {
         "separator": ","
       }
     },
-    "interval": { "ui:options": { "inline": true } },
+    "interval": { "ui:widget": "TimeNumberInput", "ui:options": { "inline": true, "unit": "ms" } },
     "multiplier": { "ui:options": { "inline": true } },
-    "limit": { "ui:options": { "inline": true } }
+    "limit": { "ui:options": { "inline": true } },
+    "maxIntervalMs": { "ui:widget": "TimeNumberInput", "ui:options": { "inline": true, "unit": "ms" } },
+    "enableHeader": { "ui:options": { "inline": true } },
+    "retryConnectTimeout": { "ui:options": { "inline": true }},
+    "retryConnectReset": { "ui:options": { "inline": true }}
+  },
+  "serviceAccountCredentials": {
+    "ui:widget": "TextareaUpload",
+    "rows": 20,
+    "ui:forceRender": true
+  },
+  "hmacFunctionId": {
+    "ui:widget": "ApiLookupWithCreate",
+    "ui:forceRender": true,
+    "ui:placeholder": "Select one",
+    "ui:options": {
+      "url": "/lib/hmac-functions",
+      "createUrl": "/lib/hmac-functions",
+      "valueProp": "id",
+      "labelProp": "id",
+      "createType": "hmacFunction",
+      "createLabel": "HMAC Function",
+      "inlineStyle": {
+          "marginTop": "20px"
+      }
+    }
   },
   "ui:options": {
     "groups": {
@@ -193,7 +248,9 @@
           "discoverDataField",
           "manualDiscoverResult",
           "discoverDataField",
-          "itemList"
+          "itemList",
+          "enableDiscoverCode",
+          "formatResultCode"
         ]
       },
       "collect": {
@@ -226,8 +283,12 @@
           "authRequestParams",
           "tokenRespAttribute",
           "authHeaderKey",
+          "authRequestHeaders",
+          "scopes",
+          "serviceAccountCredentials",
+          "subject",
           "authHeaderExpr",
-          "authRequestHeaders"
+          "hmacFunctionId"
         ]
       },
       "retries": {
@@ -238,6 +299,17 @@
         ]
       }
     }
+  },
+  "__scheduling": {
+    "ui:options": {
+      "groups": {
+        "stateTracking": {
+          "title": "State Tracking",
+          "collapsed": true,
+          "order": -1,
+          "properties": ["stateTracking"]
+        }
+      }
+    }
   }
-
 }

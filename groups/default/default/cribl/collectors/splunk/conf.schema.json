@@ -6,7 +6,10 @@
     "type": {
       "type": "string",
       "enum": ["splunk"],
-      "flag": {"prefix": "collector"}
+      "flag": {
+        "prefix": "collector",
+        "modes": ["single", "worker"]
+      }
     },
     "searchHead": {
       "type": "string",
@@ -115,6 +118,14 @@
       "description": "Used to disable collector event time filtering when a date range is specified.",
       "default": true
     },
+    "rejectUnauthorized": {
+      "type": "boolean",
+      "title": "Reject unauthorized certificates",
+      "description":
+      "Whether to reject certificates that cannot be verified against a valid CA (e.g., self-signed certificates).",
+      "default": false,
+      "defaultNew": true
+    },
     "retryRules": {
       "type": "object",
       "required": [
@@ -141,7 +152,9 @@
         "limit":{},
         "multiplier": {},
         "codes": {},
-        "enableHeader": {}
+        "enableHeader": {},
+        "retryConnectTimeout": {},
+        "retryConnectReset": {}
       },
       "dependencies": {
         "type": {
@@ -192,8 +205,20 @@
                 "enableHeader": {
                   "type": "boolean",
                   "title": "Honor Retry-After header",
-                  "description": "When toggled to Yes (the default), honors any Retry-After header that specifies a delay no longer than 20 seconds after the request that needs to be retried. (Retry-After headers that specify longer delays will always be ignored.) Toggle to No to ignore all Retry-After headers.",
+                  "description": "Honor any Retry-After header that specifies a delay (in seconds) or a timestamp after which to retry the request. The delay is limited to 20 seconds, even if the Retry-After header specifies a longer delay. When disabled, all Retry-After headers are ignored.",
                   "default": true
+                },
+                "retryConnectTimeout": {
+                  "type": "boolean",
+                  "title": "Retry Connection Timeout",
+                  "description": "When toggled to Yes (the default), there will be a single retry attempt made when a connection timeout (ETIMEDOUT) error occurs",
+                  "default": false
+                },
+                "retryConnectReset": {
+                  "type": "boolean",
+                  "title": "Retry Connection Reset",
+                  "description": "When toggled to Yes (the default), the request will be retried when a connection reset error (ECONNRESET) error occurs",
+                  "default": false
                 }
               }
             },
@@ -242,8 +267,20 @@
                 "enableHeader": {
                   "type": "boolean",
                   "title": "Honor Retry-After header",
-                  "description": "When toggled to Yes (the default), honors any Retry-After header that specifies a delay no longer than 20 seconds after the request that needs to be retried. (Retry-After headers that specify longer delays will always be ignored.) Toggle to No to ignore all Retry-After headers.",
+                  "description": "Honor any Retry-After header that specifies a delay (in seconds) or a timestamp after which to retry the request. The delay is limited to 20 seconds, even if the Retry-After header specifies a longer delay. When disabled, all Retry-After headers are ignored.",
                   "default": true
+                },
+                "retryConnectTimeout": {
+                  "type": "boolean",
+                  "title": "Retry Connection Timeout",
+                  "description": "When toggled to Yes (the default), there will be a single retry attempt made when a connection timeout (ETIMEDOUT) error occurs",
+                  "default": false
+                },
+                "retryConnectReset": {
+                  "type": "boolean",
+                  "title": "Retry Connection Reset",
+                  "description": "When toggled to Yes (the default), the request will be retried when a connection reset error (ECONNRESET) error occurs",
+                  "default": false
                 }
               }
             }

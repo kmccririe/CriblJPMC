@@ -21,6 +21,11 @@
       "type": "number",
       "description": "maximum number of groupBy properties",
       "default": 15
+    },
+    "isFederated": {
+      "type": "boolean",
+      "description": "indicator that the operator runs on a federated executor",
+      "default": false
     }
   }
 }

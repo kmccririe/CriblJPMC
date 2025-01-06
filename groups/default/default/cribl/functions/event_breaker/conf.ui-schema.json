@@ -48,7 +48,12 @@
         {
           "value": "aws_cloudtrail",
           "label": "AWS CloudTrail",
-          "description": "Breaker used to break AWS CloudTrail events",
+          "description": "Breaker used to break AWS CloudTrail events"
+        },
+        {
+          "value": "aws_vpcflow",
+          "label": "AWS VPC Flow Log",
+          "description": "Breaker and parser for AWS VPC Flow Log events"
         }
       ]
     }
@@ -98,6 +103,7 @@
     "ui:options": {
       "url": "/timezoneInfo",
       "ignorePackContext": true,
+      "ignoreContext": true,
       "valueProp": "value",
       "labelProp": "label",
       "editable": false

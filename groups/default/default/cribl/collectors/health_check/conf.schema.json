@@ -270,7 +270,8 @@
       "title": "Reject unauthorized certificates",
       "description":
         "Whether to reject certificates that cannot be verified against a valid CA (e.g., self-signed certificates).",
-      "default": false
+      "default": false,
+      "defaultNew": true
     },
     "defaultBreakers" : {
       "type": "string",
@@ -361,7 +362,7 @@
                 "enableHeader": {
                   "type": "boolean",
                   "title": "Honor Retry-After header",
-                  "description": "When toggled to Yes (the default), honors any Retry-After header that specifies a delay no longer than 20 seconds after the request that needs to be retried. (Retry-After headers that specify longer delays will always be ignored.) Toggle to No to ignore all Retry-After headers.",
+                  "description": "Honor any Retry-After header that specifies a delay (in seconds) or a timestamp after which to retry the request. The delay is limited to 20 seconds, even if the Retry-After header specifies a longer delay. When disabled, all Retry-After headers are ignored.",
                   "default": true
                 }
               }
@@ -411,7 +412,7 @@
                 "enableHeader": {
                   "type": "boolean",
                   "title": "Honor Retry-After header",
-                  "description": "When toggled to Yes (the default), honors any Retry-After header that specifies a delay no longer than 20 seconds after the request that needs to be retried. (Retry-After headers that specify longer delays will always be ignored.) Toggle to No to ignore all Retry-After headers.",
+                  "description": "Honor any Retry-After header that specifies a delay (in seconds) or a timestamp after which to retry the request. The delay is limited to 20 seconds, even if the Retry-After header specifies a longer delay. When disabled, all Retry-After headers are ignored.",
                   "default": true
                 }
               }
@@ -665,7 +666,7 @@
           }
         },
         {
-          "required": [ "loginUrl","clientSecretParamName","clientSecretParamValue","tokenRespAttribute","authHeaderExpr"],
+          "required": [ "loginUrl","clientSecretParamName","clientSecretParamValue","authHeaderExpr"],
           "properties": {
             "authentication": {
               "enum":["oauth"]
@@ -680,7 +681,7 @@
             "tokenRespAttribute": {
               "type": "string",
               "title": "Token attribute",
-              "description": "Path to token attribute in login response body. Nested attributes are OK.",
+              "description": "Path to token attribute in login response body. Nested attributes are OK. Leave blank if the response content type is text/plain; the entire response body will be used to derive the authorization header.",
               "default": "token"
             },
             "authHeaderExpr": {
@@ -750,7 +751,7 @@
           }
         },
         {
-          "required": [ "loginUrl","clientSecretParamName","textSecret","tokenRespAttribute","authHeaderExpr"],
+          "required": [ "loginUrl","clientSecretParamName","textSecret","authHeaderExpr"],
           "properties": {
             "authentication": {
               "enum":["oauthSecret"]
@@ -765,7 +766,7 @@
             "tokenRespAttribute": {
               "type": "string",
               "title": "Token attribute",
-              "description": "Path to token attribute in login response body. Nested attributes are OK.",
+              "description": "Path to token attribute in login response body. Nested attributes are OK. Leave blank if the response content type is text/plain; the entire response body will be used to derive the authorization header.",
               "default": "token"
             },
             "authHeaderExpr": {
