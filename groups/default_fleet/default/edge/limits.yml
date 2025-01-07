@@ -4,3 +4,4 @@ eventsMetadataSources:
   - aws
   - env
   - kube
+defaultHeartbeatSeconds: 60

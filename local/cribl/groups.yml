@@ -1,7 +1,7 @@
 default:
   description: Default Worker Group
   tags: default
-  configVersion: 7220a95
+  configVersion: b317056
 default_fleet:
   description: Default Fleet
   tags: default

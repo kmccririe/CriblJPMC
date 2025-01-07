@@ -1,3 +1,6 @@
+auth:
+  type: local
+  filter_type: email_whitelist
 workers:
   count: 2
   minimum: 2
@@ -6,6 +9,8 @@ git:
   gitOps: none
   authType: ssh
   autoAction: none
+  timeout: 300000
   strictHostKeyChecking: true
   commitDeploySingleAction: true
   defaultCommitMessage: Committing new update.
+  remote: https://kmccririe@bitbucket.org/cribl/kylecribl.git

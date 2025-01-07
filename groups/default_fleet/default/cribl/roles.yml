@@ -9,6 +9,9 @@ reader_all:
   policy:
     - GroupRead *
     - Product * GET
+    - POST /m/*/edge/search/file
+    - POST /w/*/edge/search/file
+    - Licenses
 collect_all:
   description: 'Users with collect_all role can run existing collection jobs of all Worker Groups'
   policy:
@@ -24,6 +27,7 @@ owner_all:
   policy:
     - Product * GET
     - GroupFull *
+    - Licenses
 notification_admin:
   description: 'Users with notification_admin role get read/write access to all Notifications.'
   policy:
@@ -60,12 +64,34 @@ stream_reader:
     - POST /m/*/system/metrics/query
     - POST /w/*/system/metrics/query
     - GET /w/*
+    - GET /system/settings
+    - GET /system/settings/auth
+    - GET /system/roles
+    - GET /system/roles/*
+    - GET /system/users
+    - GET /system/certificates
+    - GET /system/instance/*
+    - GET /security/kms/config
+    - GET /security/kms/health
+    - GET /system/scripts
+    - GET /system/app-limits
+    - GET /system/diag
+    - GET /system/diag/*
+    - POST /system/diag/download
+    - GET /settings/features
+    - GET /system/processes
+    - GET /system/services-limits
+    - GET /system/logger
+    - GET /system/policies
+    - GET /system/settings/git-settings
+    - GET /version/branch
   title: Read Only
   description: "User has read only access to all Stream resources"
 stream_editor:
   tags: [product, stream]
   policy:
     - ProductUser stream *
+    - LakeDatasetAccess default *
     - Monitor
     - '* /w/*'
   title: Editor
@@ -74,9 +100,7 @@ stream_admin:
   tags: [product, stream]
   policy:
     - ProductAdmin stream
-    - POST /preview
-    - '* /mappings'
-    - '* /mappings/*'
+    - LakeDatasetAccess default *
   title: Admin
   description: "Admin can do anything within Stream"
 edge_user:
@@ -93,10 +117,34 @@ edge_reader:
     - POST /system/metrics/query
     - POST /edge/metrics/query
     - GET /w/*
+    - POST /m/*/edge/search/file
+    - POST /w/*/edge/search/file
     - POST /m/*/edge/metrics/query
     - POST /m/*/system/metrics/query
     - POST /w/*/edge/metrics/query
     - POST /w/*/system/metrics/query
+    - POST /products/edge/map/query
+    - GET /system/settings
+    - GET /system/settings/auth
+    - GET /system/roles
+    - GET /system/roles/*
+    - GET /system/users
+    - GET /system/certificates
+    - GET /system/instance/*
+    - GET /security/kms/config
+    - GET /security/kms/health
+    - GET /system/scripts
+    - GET /system/app-limits
+    - GET /system/diag
+    - GET /system/diag/*
+    - POST /system/diag/download
+    - GET /settings/features
+    - GET /system/processes
+    - GET /system/services-limits
+    - GET /system/logger
+    - GET /system/policies
+    - GET /system/settings/git-settings
+    - GET /version/branch
   title: Read Only
   description: "User has read only access to all Edge resources"
 edge_editor:
@@ -105,6 +153,8 @@ edge_editor:
     - ProductUser edge *
     - Monitor
     - POST /edge/metrics/query
+    - POST /products/edge/map/query
+    - POST /m/*/edge/search/file
     - '* /w/*'
   title: Editor
   description: "Editor can create, read and modify all Edge resources"
@@ -112,28 +162,7 @@ edge_admin:
   tags: [product, edge]
   policy:
     - ProductAdmin edge
-    - POST /preview
-    - '* /fleet-mappings'
-    - '* /fleet-mappings/*'
+    - POST /products/edge/map/query
+    - POST /m/*/edge/search/file
   title: Admin
   description: "Admin can do anything within Edge"
-search_user:
-  tags: [product, search]
-  policy:
-    - Product search GET
-    - SearchBase *
-  title: User
-  description: "User can receive access to resources within Search"
-search_editor:
-  tags: [product, search]
-  policy:
-    - LimitedProductUser search
-    - SearchMaintainer *
-  title: Editor
-  description: "Editor can create, read and modify all Search resources"
-search_admin:
-  tags: [product, search]
-  policy:
-    - ProductAdmin search
-  title: Admin
-  description: "Admin can do anything within Search"

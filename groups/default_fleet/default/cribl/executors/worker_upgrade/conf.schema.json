@@ -6,7 +6,6 @@
     "authToken": {
       "type": "string",
       "title": "Auth token",
-      "description": "Package download auth token",
       "minLength": 1,
       "encrypt": true
     },
@@ -18,50 +17,52 @@
         "properties": {
           "packageUrl": {
             "type": "string",
-            "title": "Package URL",
-            "description": "Download URL for the Cribl binary",
+            "title": "CDN package URL",
             "minLength": 1
           },
           "packageFile": {
             "type": "string",
             "title": "Package destination",
-            "description": "Package destination in the master node",
             "minLength": 1
           },
           "hashUrl": {
             "type": "string",
-            "title": "Hash URL",
-            "description": "Download URL for package checksum",
+            "title": "CDN hash URL",
             "minLength": 1
           },
           "hashFile": {
             "type": "string",
             "title": "Hash destination",
-            "description": "Hash file destination in the master node",
             "minLength": 1
           },
-          "version": {
+          "localPackagePath": {
             "type": "string",
-            "title": "Cribl version",
-            "description": "Version to install",
+            "title": "Leader package URL path",
+            "minLength": 1
+          },
+          "localPackageUrl": {
+            "type": "string",
+            "title": "Leader package URL",
             "minLength": 1
           },
           "hashType": {
             "type": "string",
             "title": "Hash type",
-            "description": "Type of verification hash used",
+            "minLength": 1
+          },
+          "localHashPath": {
+            "type": "string",
+            "title": "Leader hash URL path",
             "minLength": 1
           },
           "localHashUrl": {
             "type": "string",
-            "title": "Verification hash URL",
-            "description": "Internal download URL for the verification hash file",
+            "title": "Leader hash URL",
             "minLength": 1
           },
-          "localPackageUrl": {
+          "version": {
             "type": "string",
-            "title": "Package URL",
-            "description": "Internal download URL for the Cribl binary",
+            "title": "Cribl version",
             "minLength": 1
           },
           "variant": {
@@ -70,7 +71,6 @@
             "contains": {
               "type": "string"
             },
-            "description": "Target platform and architecture tuple, e.g. linux, x64 ",
             "minItems": 2,
             "maxItems": 2
           }

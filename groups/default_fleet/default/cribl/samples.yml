@@ -131,3 +131,15 @@ sentinel_commonsecuritylog:
   created: 1687985631
   size: 5553
   numEvents: 1
+model_driven_telemetry:
+  sampleName: model_driven_telemetry.log
+  isTemplate: true
+  created: 1707287700
+  size: 2562
+  numEvents: 5
+google_secops_udm_zeek_logs:
+  sampleName: google_secops_udm_zeek_logs.log
+  isTemplate: true
+  created: 1715300055
+  size: 3804
+  numEvents: 10

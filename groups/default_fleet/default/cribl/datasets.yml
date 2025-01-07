@@ -62,6 +62,14 @@ cribl_edge_kubernetes_logs:
     - '*'
   path: '$CRIBL_SPOOL_DIR/in/kube_logs/${input_id}/${__earliest:%s}_${__latest:%s}/${namespace}/${pod}/${container}'
   filter: "!source.endsWith('.tmp')"
+cribl_edge_spool:
+  provider: cribl_edge
+  type: cribl_edge
+  description: Search Cribl Edge Disk Spool outputs
+  fleets:
+    - '*'
+  path: '$CRIBL_SPOOL_DIR/out/disk_spool/${output_id}/${__earliest:%s}_${__latest:%s}'
+  filter: "!source.endsWith('.tmp')"
 cribl_internal_logs:
   provider: cribl_leader
   type: cribl_leader
@@ -99,4 +107,4 @@ default:
   type: cribl_meta
   description: Default list of datasets to be searched when none is specified
   datasets:
-    - cribl_internal_logs 
+    - cribl_search_sample 

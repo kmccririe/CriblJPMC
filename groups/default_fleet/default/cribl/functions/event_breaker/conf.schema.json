@@ -29,8 +29,8 @@
             "ruleType": {
               "type": "string",
               "title": "Event Breaker Type",
-              "enum": ["regex", "json", "json_array", "header", "timestamp", "csv", "aws_cloudtrail"],
-              "enumNames": ["Regex", "JSON Newline Delimited", "JSON Array", "File Header", "Timestamp", "CSV"],
+              "enum": ["regex", "json", "json_array", "header", "timestamp", "csv", "aws_cloudtrail", "aws_vpcflow"],
+              "enumNames": ["Regex", "JSON Newline Delimited", "JSON Array", "File Header", "Timestamp", "CSV",  "AWS CloudTrail", "AWS VPC Flow Log"],
               "description": "Event Breaker Type",
               "default": "regex"
             },
@@ -144,7 +144,7 @@
                 {
                   "properties": {
                     "ruleType": {
-                      "enum": ["json", "timestamp", "aws_cloudtrail"]
+                      "enum": ["json", "timestamp", "aws_cloudtrail", "aws_vpcflow"]
                     }
                   }
                 },

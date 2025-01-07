@@ -6,7 +6,10 @@
     "type": {
       "type": "string",
       "enum": ["google_cloud_storage"],
-      "flag": {"prefix": "collector"}
+      "flag": {
+        "prefix": "collector",
+        "modes": ["single", "worker"]
+      }
     },
     "outputName": {
       "type": "string",
@@ -77,9 +80,9 @@
     "authType": {
         "title": "Authentication method",
         "type": "string",
-        "enum": ["manual", "secret"],
+        "enum": ["auto", "manual", "secret"],
         "default": "manual",
-        "description": "Enter account credentials manually, or select a secret that references your credentials."
+        "description": "Enter account credentials manually, select a secret that references your credentials, or use Google Application Default Credentials"
     },
     "parquetChunkSizeMB": {
       "type": "number",
@@ -102,6 +105,11 @@
     "authType": {
       "oneOf": [
         {
+          "properties": {
+            "authType": {"enum":["auto"]}
+          }
+        },
+        {
           "required": ["serviceAccountCredentials"],
           "properties": {
             "authType": {"enum":["manual"]},
@@ -112,7 +120,8 @@
               "encrypt": true
             }
           }
-        }, {
+        },
+        {
           "required": ["textSecret"],
           "properties": {
             "authType": { "enum":["secret"] },

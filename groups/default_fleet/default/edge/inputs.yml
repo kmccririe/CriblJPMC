@@ -63,7 +63,7 @@ inputs:
       - "system"
     type: journal_files
   in_appscope:
-    disabled: false
+    disabled: true
     sendToRoutes: true
     tags: []
     ipWhitelistRegex: /.*/

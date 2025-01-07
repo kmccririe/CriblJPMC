@@ -24,3 +24,6 @@ data/uploads
 **/auth/ssh/git.key
 ha-version.txt
 ### CUSTOM SECTION -- DO NOT REMOVE ###
+*.swp
+moby*
+.DS_Store

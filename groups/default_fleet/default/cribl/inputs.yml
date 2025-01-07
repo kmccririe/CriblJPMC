@@ -17,6 +17,7 @@ inputs:
     staleChannelFlushMs: 10000
     type: splunk
     port: 9997
+    maxS2Sversion: v4
   in_splunk_hec:
     disabled: true
     host: 0.0.0.0

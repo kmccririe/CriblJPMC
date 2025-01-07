@@ -3,9 +3,11 @@
     "ui:placeholder": "Select lake dataset",
     "ui:widget": "ApiLookup",
     "ui:options": {
-      "url": "/system/lake/datasets",
+      "url": "/products/lake/lakes/default/datasets",
+      "ignoreContext": true,
       "valueProp": "id",
-      "labelProp": "id"
+      "labelProp": "id",
+      "createType": "lakeDataset"
     }
   }
 }
