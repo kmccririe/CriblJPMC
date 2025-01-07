@@ -13,3 +13,4 @@ git:
   strictHostKeyChecking: false
   commitDeploySingleAction: true
   defaultCommitMessage: Committing new update.
+  remote: git@github.com:kmccririe/CriblJPMC.git
