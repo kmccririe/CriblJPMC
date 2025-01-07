@@ -7,7 +7,7 @@ workers:
   memory: 2048
 git:
   gitOps: none
-  authType: none
+  authType: ssh
   autoAction: none
   timeout: 300000
   strictHostKeyChecking: false
