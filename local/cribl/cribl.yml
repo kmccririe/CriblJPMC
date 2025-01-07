@@ -10,7 +10,7 @@ git:
   authType: ssh
   autoAction: none
   timeout: 300000
-  strictHostKeyChecking: true
+  strictHostKeyChecking: false
   commitDeploySingleAction: true
   defaultCommitMessage: Committing new update.
   remote: git@bitbucket.org:cribl/kylecribl.git
