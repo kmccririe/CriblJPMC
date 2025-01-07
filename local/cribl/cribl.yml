@@ -13,4 +13,3 @@ git:
   strictHostKeyChecking: false
   commitDeploySingleAction: true
   defaultCommitMessage: Committing new update.
-  remote: git@bitbucket.org:cribl/kylecribl.git
